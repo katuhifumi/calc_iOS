@@ -37,6 +37,12 @@
 - (IBAction)number1:(id)sender {
     [inputNumber appendString:@"1"];
     _outputLabel.text = inputNumber;
+    
+    //doubleで取り出す
+    double test =[_outputLabel.text doubleValue];
+    NSLog(@"ラベルのテキストをdoubleに変換；%f",test);
+    //配列の中身
+    NSLog(@"配列の中身：%@",inputNumber);
 }
 
 
