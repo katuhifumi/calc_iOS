@@ -9,7 +9,7 @@
 #import "FlipsideViewController.h"
 
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate>{
-    //入力内容を入れておく変数
+    //入力内容を入れておく変数です
     NSMutableString *inputNumber;
 }
 
