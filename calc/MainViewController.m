@@ -9,6 +9,9 @@
 #import "MainViewController.h"
 
 @interface MainViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *outputLabel;
+- (IBAction)number1:(id)sender;
+
 
 @end
 
@@ -18,6 +21,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    inputNumber =  [NSMutableString	string];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -25,6 +31,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+//数字ボタンをタップした時
+- (IBAction)number1:(id)sender {
+    [inputNumber appendString:@"1"];
+    _outputLabel.text = inputNumber;
+}
+
+
 
 #pragma mark - Flipside View
 
