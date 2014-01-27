@@ -23,6 +23,9 @@
 	// Do any additional setup after loading the view, typically from a nib.
 
     inputNumber =  [NSMutableString	string];
+    
+    //小数点フラグ初期化
+    dotFlag = NO;
 
 }
 
@@ -70,20 +73,24 @@
             break;
         case 10:
             select = @".";
+            dotFlag = YES;
             break;
             
         default:
             break;
     }
     
-    [inputNumber appendString:select];
-    _outputLabel.text = inputNumber;
+    if(!dotFlag){
     
-    //doubleで取り出す
-    double test =[_outputLabel.text doubleValue];
-    NSLog(@"ラベルのテキストをdoubleに変換；%f",test);
-    //配列の中身
-    NSLog(@"配列の中身：%@",inputNumber);
+        [inputNumber appendString:select];
+        _outputLabel.text = inputNumber;
+    
+        //doubleで取り出す
+        double test =[_outputLabel.text doubleValue];
+        NSLog(@"ラベルのテキストをdoubleに変換；%f",test);
+        //配列の中身
+        NSLog(@"配列の中身：%@",inputNumber);
+    }
 }
 
 

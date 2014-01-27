@@ -11,6 +11,8 @@
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate>{
     //入力内容を入れておく変数ですよ
     NSMutableString *inputNumber;
+    //小数点を押したかフラグ
+    BOOL dotFlag;
 }
 
 @end
