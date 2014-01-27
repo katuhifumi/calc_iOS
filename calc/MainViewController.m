@@ -10,7 +10,7 @@
 
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
-- (IBAction)number1:(id)sender;
+- (IBAction)numberTap:(UIButton *)sender;
 
 
 @end
@@ -32,10 +32,51 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 //数字ボタンをタップした時の処理だよ
-- (IBAction)number1:(id)sender {
-    [inputNumber appendString:@"1"];
+- (IBAction)numberTap:(UIButton *)sender {
+    
+    NSString *select;
+    
+    switch (sender.tag) {
+        case 0:
+            select = @"0";
+            break;
+        case 1:
+            select = @"1";
+            break;
+        case 2:
+            select = @"2";
+            break;
+        case 3:
+            select = @"3";
+            break;
+        case 4:
+            select = @"4";
+            break;
+        case 5:
+            select = @"5";
+            break;
+        case 6:
+            select = @"6";
+            break;
+        case 7:
+            select = @"7";
+            break;
+        case 8:
+            select = @"8";
+            break;
+        case 9:
+            select = @"9";
+            break;
+        case 10:
+            select = @".";
+            break;
+            
+        default:
+            break;
+    }
+    
+    [inputNumber appendString:select];
     _outputLabel.text = inputNumber;
     
     //doubleで取り出す
