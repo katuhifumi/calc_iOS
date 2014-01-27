@@ -33,7 +33,7 @@
 }
 
 
-//数字ボタンをタップした時の処理
+//数字ボタンをタップした時の処理だよ
 - (IBAction)number1:(id)sender {
     [inputNumber appendString:@"1"];
     _outputLabel.text = inputNumber;
