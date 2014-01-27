@@ -32,7 +32,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//数字ボタンをタップした時の処理だよ
+//数字ボタンをタップした時の処理だよよ
 - (IBAction)numberTap:(UIButton *)sender {
     
     NSString *select;
