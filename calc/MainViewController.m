@@ -26,6 +26,9 @@
     
     //小数点フラグ初期化
     dotFlag = NO;
+    
+    //キータップカウンタ初期化
+    counter = 0;
 
 }
 
@@ -73,23 +76,44 @@
             break;
         case 10:
             select = @".";
-            dotFlag = YES;
             break;
             
         default:
             break;
     }
+
+    //ラベルに文字を順番に出す
+    if(!dotFlag || (![select isEqualToString:@"."]) ){
+        //もし初回タップが.だった時は頭に0を入れる
+        if (counter == 0 && [select isEqualToString:@"."]) {
+            [inputNumber appendString:@"0"];
+            counter = 1;
+        }
+        
+        if (counter < 9){
+            //配列にタップしたナンバーを追加
+            [inputNumber appendString:select];
+            _outputLabel.text = inputNumber;
     
-    if(!dotFlag){
-    
-        [inputNumber appendString:select];
-        _outputLabel.text = inputNumber;
-    
-        //doubleで取り出す
-        double test =[_outputLabel.text doubleValue];
-        NSLog(@"ラベルのテキストをdoubleに変換；%f",test);
-        //配列の中身
-        NSLog(@"配列の中身：%@",inputNumber);
+            //doubleで取り出す
+            double test =[_outputLabel.text doubleValue];
+            NSLog(@"ラベルのテキストをdoubleに変換；%f",test);
+            //配列の中身
+            NSLog(@"配列の中身：%@",inputNumber);
+            
+            //.の多重入力防止
+            if ([select isEqualToString:@"."]) {
+              dotFlag = YES;
+            }
+
+            counter++;
+            NSLog(@"カウンタ：%d",counter);
+        }
+
+        //.は入力回数にカウントしない
+        if([select isEqualToString:@"."]){
+            counter--;
+        }
     }
 }
 

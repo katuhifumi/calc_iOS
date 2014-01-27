@@ -13,6 +13,8 @@
     NSMutableString *inputNumber;
     //小数点を押したかフラグ
     BOOL dotFlag;
+    //キータップ回数
+    NSInteger counter;
 }
 
 @end
