@@ -7,10 +7,21 @@
 //
 
 #import "MainViewController.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
 - (IBAction)numberTap:(UIButton *)sender;
+- (IBAction)fourTap:(UIButton *)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *plusTap;
+@property (weak, nonatomic) IBOutlet UIButton *minusTap;
+@property (weak, nonatomic) IBOutlet UIButton *timesTap;
+@property (weak, nonatomic) IBOutlet UIButton *devidesTap;
+
+- (IBAction)clearButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *clearButton;
 
 
 @end
@@ -84,12 +95,21 @@
 
     //ラベルに文字を順番に出す
     if(!dotFlag || (![select isEqualToString:@"."]) ){
+        
+        [[_plusTap layer] setBorderWidth:0];
+        [[_minusTap layer] setBorderWidth:0];
+        [[_timesTap layer] setBorderWidth:0];
+        [[_devidesTap layer] setBorderWidth:0];
+        
         //もし初回タップが.だった時は頭に0を入れる
         if (counter == 0 && [select isEqualToString:@"."]) {
             [inputNumber appendString:@"0"];
             counter = 1;
         }
         
+        //初回タップのときACをCにする
+        [_clearButton setTitle:@"C" forState:UIControlStateNormal];
+
         if (counter < 9){
             //配列にタップしたナンバーを追加
             [inputNumber appendString:select];
@@ -115,6 +135,56 @@
             counter--;
         }
     }
+}
+
+
+//四則計算ボタンを押したときの処理
+- (IBAction)fourTap:(UIButton *)sender {
+    NSString *select;
+
+    [[_plusTap layer] setBorderWidth:0];
+    [[_minusTap layer] setBorderWidth:0];
+    [[_timesTap layer] setBorderWidth:0];
+    [[_devidesTap layer] setBorderWidth:0];
+    
+    switch (sender.tag) {
+        case 0:
+            select = @"+";
+            break;
+        case 1:
+            select = @"-";
+            break;
+        case 2:
+            select = @"x";
+            break;
+        case 3:
+            select = @"÷";
+            break;
+        default:
+            break;
+    }
+    
+    [[sender layer] setBorderWidth:2.0f];
+    [[sender layer] setBorderColor:[UIColor blackColor].CGColor];
+    
+    NSLog(@"%@",select);
+    
+}
+
+
+
+
+//クリアボタン処理
+- (IBAction)clearButton:(id)sender {
+    //全部初期化
+    _outputLabel.text = @"0";
+    [inputNumber setString:@""];
+    counter = 0;
+    dotFlag = NO;
+    
+    //CボタンのタイトルをCにする
+    [_clearButton setTitle:@"AC" forState:UIControlStateNormal];
+    
 }
 
 

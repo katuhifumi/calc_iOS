@@ -11,6 +11,8 @@
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate>{
     //入力内容を入れておく変数ですよ
     NSMutableString *inputNumber;
+    //四則ボタンのどれを押したか情報を入れておく変数
+    
     //小数点を押したかフラグ
     BOOL dotFlag;
     //キータップ回数

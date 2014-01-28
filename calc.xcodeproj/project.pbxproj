@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AF48B981897C45D00C4BB21 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF48B971897C45D00C4BB21 /* QuartzCore.framework */; };
 		5CF650E01895423B00607A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF650DF1895423B00607A4C /* Foundation.framework */; };
 		5CF650E21895423B00607A4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF650E11895423B00607A4C /* CoreGraphics.framework */; };
 		5CF650E41895423C00607A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF650E31895423B00607A4C /* UIKit.framework */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AF48B971897C45D00C4BB21 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5CF650DC1895423B00607A4C /* calc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF650DF1895423B00607A4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5CF650E11895423B00607A4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF48B981897C45D00C4BB21 /* QuartzCore.framework in Frameworks */,
 				5CF650E21895423B00607A4C /* CoreGraphics.framework in Frameworks */,
 				5CF650E41895423C00607A4C /* UIKit.framework in Frameworks */,
 				5CF650E01895423B00607A4C /* Foundation.framework in Frameworks */,
@@ -104,6 +107,7 @@
 		5CF650DE1895423B00607A4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AF48B971897C45D00C4BB21 /* QuartzCore.framework */,
 				5CF650DF1895423B00607A4C /* Foundation.framework */,
 				5CF650E11895423B00607A4C /* CoreGraphics.framework */,
 				5CF650E31895423B00607A4C /* UIKit.framework */,
