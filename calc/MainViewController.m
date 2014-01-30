@@ -8,9 +8,13 @@
 
 #import "MainViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "calc.h"
 
 
-@interface MainViewController ()
+@interface MainViewController (){
+    //calcクラスのインスタンス
+    calc *calcobj;
+}
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
 - (IBAction)numberTap:(UIButton *)sender;
 - (IBAction)fourTap:(UIButton *)sender;
@@ -40,6 +44,17 @@
     
     //キータップカウンタ初期化
     counter = 0;
+    
+    //四則計算フラグ初期化
+    fourFlag = 0;
+    
+    //値を入れておく配列の初期化
+    inputValues = [NSMutableArray arrayWithCapacity:0];
+    
+    //計算結果最初は0
+    result = 0;
+    
+    calcobj =[[calc alloc]init];
 
 }
 
@@ -118,6 +133,7 @@
             //doubleで取り出す
             double test =[_outputLabel.text doubleValue];
             NSLog(@"ラベルのテキストをdoubleに変換；%f",test);
+            
             //配列の中身
             NSLog(@"配列の中身：%@",inputNumber);
             
@@ -150,15 +166,36 @@
     switch (sender.tag) {
         case 0:
             select = @"+";
+            fourFlag = 1;
+
+            
+            //計算
+            result = [calcobj calcResult:[_outputLabel.text doubleValue] n2:5 seed:fourFlag];
+            NSLog(@"ラベル；%@",_outputLabel.text);
+            NSLog(@"計算結果；%f",result);
+            
+            //ラベルの数値をNumber型に収める
+            num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+            
+            //配列の最後に収めておく
+            [inputValues addObject:num];
+            
+            _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+            
+            counter = 0;
+            dotFlag = NO;
             break;
         case 1:
             select = @"-";
+            fourFlag = 2;
             break;
         case 2:
             select = @"x";
+            fourFlag = 3;
             break;
         case 3:
             select = @"÷";
+            fourFlag = 4;
             break;
         default:
             break;
@@ -168,10 +205,7 @@
     [[sender layer] setBorderColor:[UIColor blackColor].CGColor];
     
     NSLog(@"%@",select);
-    
 }
-
-
 
 
 //クリアボタン処理
@@ -182,7 +216,7 @@
     counter = 0;
     dotFlag = NO;
     
-    //CボタンのタイトルをCにする
+    //CボタンのタイトルをACにする
     [_clearButton setTitle:@"AC" forState:UIControlStateNormal];
     
 }
