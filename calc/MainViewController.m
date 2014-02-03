@@ -171,8 +171,8 @@
             
             //計算
             result = [calcobj calcResult:[_outputLabel.text doubleValue] n2:5 seed:fourFlag];
-            NSLog(@"ラベル；%@",_outputLabel.text);
-            NSLog(@"計算結果；%f",result);
+            NSLog(@"ラベルしょ；%@",_outputLabel.text);
+            NSLog(@"計算結果だよ；%f",result);
             
             //ラベルの数値をNumber型に収める
             num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
