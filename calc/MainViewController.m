@@ -50,8 +50,11 @@
     
     //値を入れておく配列の初期化
     inputValues = [NSMutableArray arrayWithCapacity:0];
+    //配列の最初に０を入れておく
+    num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+    [inputValues addObject:num];
     
-    //計算結果最初は0
+    //計算結果最初は0で初期化
     result = 0;
     
     calcobj =[[calc alloc]init];
@@ -168,20 +171,26 @@
             select = @"+";
             fourFlag = 1;
 
-            
-            //計算
-            result = [calcobj calcResult:[_outputLabel.text doubleValue] n2:5 seed:fourFlag];
-            NSLog(@"ラベルしょ；%@",_outputLabel.text);
-            NSLog(@"計算結果だよ；%f",result);
-            
+            NSLog(@"配列の最後の値；%g",[[inputValues lastObject] doubleValue]);
+
             //ラベルの数値をNumber型に収める
             num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
-            
             //配列の最後に収めておく
             [inputValues addObject:num];
             
-            _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+            //計算
+            int cnt = [inputValues count];
+            result = [calcobj calcResult:[[inputValues objectAtIndex:cnt-2] doubleValue] n2:[[inputValues lastObject] doubleValue] seed:fourFlag];
+
+            NSLog(@"label；%@",_outputLabel.text);
+            NSLog(@"result；%f",result);
             
+            _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+            num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+            //配列の最後に収めておく
+            [inputValues addObject:num];
+            
+            [inputNumber setString:@""];
             counter = 0;
             dotFlag = NO;
             break;
@@ -213,12 +222,19 @@
     //全部初期化
     _outputLabel.text = @"0";
     [inputNumber setString:@""];
-    counter = 0;
     dotFlag = NO;
     
     //CボタンのタイトルをACにする
     [_clearButton setTitle:@"AC" forState:UIControlStateNormal];
     
+    if (counter==0) {
+      [inputValues removeAllObjects];
+      //配列の最初に０を入れておく
+      num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+      [inputValues addObject:num];
+    };
+    counter = 0;
+
 }
 
 
