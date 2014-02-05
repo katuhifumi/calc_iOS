@@ -12,7 +12,7 @@
 
 
 @interface MainViewController (){
-    //calcクラスのインスタンスだよよ
+    //calcクラスのインスタンスです
     calc *calcobj;
 }
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
