@@ -48,6 +48,9 @@
     //四則計算フラグ初期化
     fourFlag = 0;
     
+    //演算記号連続タップの防止フラグ
+    doubleFlag = 0;
+    
     //値を入れておく配列の初期化
     inputValues = [NSMutableArray arrayWithCapacity:0];
     //配列の最初に０を入れておく
@@ -69,6 +72,9 @@
 
 //数字ボタンをタップした時の処理だよよ
 - (IBAction)numberTap:(UIButton *)sender {
+    
+    //四則計算ボタン連続タップ初期化
+    doubleFlag = 0;
     
     NSString *select;
     
@@ -148,6 +154,8 @@
             counter++;
             NSLog(@"カウンタ：%d",counter);
         }
+        
+        //NSLog(@"タップした四則演算ボタンは%ld",fourFlag);
 
         //.は入力回数にカウントしない
         if([select isEqualToString:@"."]){
@@ -166,49 +174,153 @@
     [[_timesTap layer] setBorderWidth:0];
     [[_devidesTap layer] setBorderWidth:0];
     
-    switch (sender.tag) {
-        case 0:
-            select = @"+";
-            fourFlag = 1;
-
-            NSLog(@"配列の最後の値；%g",[[inputValues lastObject] doubleValue]);
-
-            //ラベルの数値をNumber型に収める
-            num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
-            //配列の最後に収めておく
-            [inputValues addObject:num];
-            
-            //計算
-            int cnt = [inputValues count];
-            result = [calcobj calcResult:[[inputValues objectAtIndex:cnt-2] doubleValue] n2:[[inputValues lastObject] doubleValue] seed:fourFlag];
-
-            NSLog(@"label；%@",_outputLabel.text);
-            NSLog(@"result；%f",result);
-            
-            _outputLabel.text = [NSString stringWithFormat:@"%g",result];
-            num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
-            //配列の最後に収めておく
-            [inputValues addObject:num];
-            
-            [inputNumber setString:@""];
-            counter = 0;
-            dotFlag = NO;
-            break;
-        case 1:
-            select = @"-";
-            fourFlag = 2;
-            break;
-        case 2:
-            select = @"x";
-            fourFlag = 3;
-            break;
-        case 3:
-            select = @"÷";
-            fourFlag = 4;
-            break;
-        default:
-            break;
+    
+    if(doubleFlag == 0){
+        switch (sender.tag) {
+            case 0:
+                select = @"+";
+                
+                NSLog(@"配列の最後の値；%g",[[inputValues lastObject] doubleValue]);
+                
+                //ラベルの数値をNumber型に収める
+                num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                //配列の最後に収めておく
+                [inputValues addObject:num];
+                
+                
+                if(fourFlag != 0){
+                //計算
+                int cnt = [inputValues count];
+                result = [calcobj calcResult:[[inputValues objectAtIndex:cnt-2] doubleValue] n2:[[inputValues lastObject] doubleValue] seed:fourFlag];
+                
+                NSLog(@"label；%@",_outputLabel.text);
+                NSLog(@"result；%f",result);
+                
+                //_outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                //num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                
+                num = [NSNumber numberWithDouble:result];
+                _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                
+                }
+                    
+                //配列の最後に収めておく
+                [inputValues addObject:num];
+                
+                [inputNumber setString:@""];
+                
+                fourFlag = 1;
+                counter = 0;
+                dotFlag = NO;
+                doubleFlag = 1;
+                break;
+            case 1:
+                select = @"-";
+                
+                NSLog(@"配列の最後の値；%g",[[inputValues lastObject] doubleValue]);
+                
+                //ラベルの数値をNumber型に収める
+                num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                //配列の最後に収めておく
+                [inputValues addObject:num];
+                
+                if(fourFlag != 0){
+                    //計算
+                    int cnt = [inputValues count];
+                    result = [calcobj calcResult:[[inputValues objectAtIndex:cnt-2] doubleValue] n2:[[inputValues lastObject] doubleValue] seed:fourFlag];
+                    
+                    NSLog(@"label；%@",_outputLabel.text);
+                    NSLog(@"result；%f",result);
+                    
+                    //_outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                    //num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                    
+                    num = [NSNumber numberWithDouble:result];
+                    _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                    
+                }
+                
+                [inputValues addObject:num];
+                
+                [inputNumber setString:@""];
+                counter = 0;
+                dotFlag = NO;
+                doubleFlag = 1;
+                fourFlag = 2;
+                break;
+            case 2:
+                select = @"x";
+                
+                NSLog(@"配列の最後の値；%g",[[inputValues lastObject] doubleValue]);
+                
+                //ラベルの数値をNumber型に収める
+                num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                //配列の最後に収めておく
+                [inputValues addObject:num];
+                
+                if(fourFlag != 0){
+                    //計算
+                    int cnt = [inputValues count];
+                    result = [calcobj calcResult:[[inputValues objectAtIndex:cnt-2] doubleValue] n2:[[inputValues lastObject] doubleValue] seed:fourFlag];
+                    
+                    NSLog(@"label；%@",_outputLabel.text);
+                    NSLog(@"result；%f",result);
+                    
+                    //_outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                    //num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                    
+                    num = [NSNumber numberWithDouble:result];
+                    _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                }
+                
+                //配列の最後に収めておく
+                [inputValues addObject:num];
+                
+                [inputNumber setString:@""];
+                counter = 0;
+                dotFlag = NO;
+                doubleFlag = 1;
+                fourFlag = 3;
+                break;
+            case 3:
+                select = @"÷";
+                
+                NSLog(@"配列の最後の値；%g",[[inputValues lastObject] doubleValue]);
+                
+                //ラベルの数値をNumber型に収める
+                num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                //配列の最後に収めておく
+                [inputValues addObject:num];
+                
+                if(fourFlag != 0){
+                    //計算
+                    int cnt = [inputValues count];
+                    result = [calcobj calcResult:[[inputValues objectAtIndex:cnt-2] doubleValue] n2:[[inputValues lastObject] doubleValue] seed:fourFlag];
+                    
+                    NSLog(@"label；%@",_outputLabel.text);
+                    NSLog(@"result；%f",result);
+                    
+                    //_outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                    //num = [NSNumber numberWithDouble:[_outputLabel.text doubleValue]];
+                    
+                    num = [NSNumber numberWithDouble:result];
+                    _outputLabel.text = [NSString stringWithFormat:@"%g",result];
+                }
+                
+                [inputValues addObject:num];
+                
+                [inputNumber setString:@""];
+                counter = 0;
+                dotFlag = NO;
+                doubleFlag = 1;
+                fourFlag = 4;
+                break;
+            default:
+                break;
+        }
     }
+
+    
     
     [[sender layer] setBorderWidth:2.0f];
     [[sender layer] setBorderColor:[UIColor blackColor].CGColor];
@@ -234,7 +346,8 @@
       [inputValues addObject:num];
     };
     counter = 0;
-
+    doubleFlag = 0;
+    fourFlag = 0;
 }
 
 

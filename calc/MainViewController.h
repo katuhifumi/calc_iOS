@@ -15,6 +15,8 @@
     NSInteger fourFlag;
     //小数点を押したかフラグ
     BOOL dotFlag;
+    //演算記号連続タップの防止フラグ
+    BOOL doubleFlag;
     //キータップ回数
     NSInteger counter;
     //ラベルの数値をラップしておく変数

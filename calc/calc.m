@@ -13,9 +13,15 @@
 
 //計算結果を返す
 - (double)calcResult:(double)number1 n2:(double)number2 seed:(NSInteger)mySeed{
-
-    result = number1 + number2;
-    
+    if(mySeed==1){
+        result = number1 + number2;
+    }else if(mySeed==2){
+        result = number1 - number2;
+    }else if (mySeed==3){
+        result = number1 * number2;
+    }else if (mySeed==4){
+        result = number1 / number2;
+    }
     return result;
 }
 
